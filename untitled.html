@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kejutan Cantik</title>
+    <style>
+        /* Mengatur tampilan halaman utama */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffe6f2; /* Warna pink soft */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Desain tombol pencet cantik */
+        .btn-cantik {
+            padding: 15px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(45deg, #ff4d94, #ff80df);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 77, 148, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-cantik:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 77, 148, 0.6);
+        }
+
+        /* Container Jumpscare (Tersembunyi di awal) */
+        #jumpscare-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Animasi gambar jumpscare biar makin kaget */
+        #jumpscare-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: shake 0.1s infinite;
+        }
+
+        /* Efek getar pada gambar */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(0px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(2px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(2px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tombol Pemicu -->
+    <button class="btn-cantik" onclick="munculkanJumpscare()">Pencet Cantik</button>
+
+    <!-- Overlay Tempat Jumpscare Muncul -->
+    <div id="jumpscare-overlay">
+        <!-- GANTI URL_GAMBAR_SERAM_KAMU dengan link gambar setannya -->
+        <img id="jumpscare-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRetLiXderHNqetWb89PbN1EBprTZQBALyXxLZMUX1F9w&s=10" alt="Jumpscare!">
+    </div>
+
+    <!-- Audio Efek Suara -->
+    <!-- GANTI URL_SUARA_TERIAKAN_KAMU dengan link mp3 suara teriakan -->
+<audio id="jumpscare-audio" src="suara.mp3" preload="auto"></audio>
+
+    <script>
+        function munculkanJumpscare() {
+            const overlay = document.getElementById('jumpscare-overlay');
+            const audio = document.getElementById('jumpscare-audio');
+
+            // 1. Tampilkan overlay gambar full screen
+            overlay.style.display = 'flex';
+
+            // 2. Putar suara teriakan
+            audio.play().catch(function(error) {
+                console.log("Gagal memutar suara otomatis: ", error);
+            });
+
+            // Optional: Menghilangkan jumpscare setelah 3 detik dan reload halaman
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                location.reload(); 
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
